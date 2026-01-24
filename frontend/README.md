@@ -20,6 +20,7 @@ Modern, responsive dashboard for real‑time farm monitoring. Aavek streams robo
 ## Getting Started
 
 ### Requirements
+
 - Node.js 18+ and npm
 - Git (optional, for contributing)
 

@@ -89,19 +89,19 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
   }
-  
+
   /* Custom scrollbar for light theme */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
-  
+
   ::-webkit-scrollbar-track {
     @apply bg-muted/30 rounded-full;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50;
   }
@@ -111,78 +111,82 @@
   /* Glassmorphism card */
   .glass-panel {
     @apply bg-card/70 backdrop-blur-xl border border-border/50 rounded-xl;
-    box-shadow: 
+    box-shadow:
       0 4px 24px -4px hsl(var(--background) / 0.5),
       inset 0 1px 0 0 hsl(var(--foreground) / 0.05);
   }
-  
+
   /* Glow effects */
   .glow-primary {
-    box-shadow: 0 0 20px hsl(var(--glow-primary)), 0 0 40px hsl(var(--glow-primary));
+    box-shadow:
+      0 0 20px hsl(var(--glow-primary)),
+      0 0 40px hsl(var(--glow-primary));
   }
-  
+
   .glow-alert {
-    box-shadow: 0 0 20px hsl(var(--glow-alert)), 0 0 40px hsl(var(--glow-alert));
+    box-shadow:
+      0 0 20px hsl(var(--glow-alert)),
+      0 0 40px hsl(var(--glow-alert));
   }
-  
+
   .glow-accent {
     box-shadow: 0 0 15px hsl(var(--glow-accent));
   }
-  
+
   /* Status chips */
   .status-chip {
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
   }
-  
+
   .status-chip-idle {
     @apply bg-muted text-muted-foreground;
   }
-  
+
   .status-chip-scanning {
     @apply bg-accent/20 text-accent;
   }
-  
+
   .status-chip-spraying {
     @apply bg-secondary/20 text-secondary;
   }
-  
+
   .status-chip-alert {
     @apply bg-destructive/20 text-destructive;
   }
-  
+
   .status-chip-returning {
     @apply bg-purple-500/20 text-purple-400;
   }
-  
+
   /* Animated bars */
   .progress-bar {
     @apply h-2 rounded-full bg-muted overflow-hidden;
   }
-  
+
   .progress-bar-fill {
     @apply h-full rounded-full transition-all duration-500 ease-out;
   }
-  
+
   /* Network indicator */
   .network-dot {
     @apply w-2 h-2 rounded-full;
   }
-  
+
   .network-online {
     @apply bg-primary animate-pulse;
   }
-  
+
   .network-offline {
     @apply bg-destructive animate-ping;
   }
-  
+
   /* Permission button with shimmer */
   .btn-permission {
     @apply relative overflow-hidden;
   }
-  
+
   .btn-permission::before {
-    content: '';
+    content: "";
     @apply absolute inset-0 -translate-x-full;
     background: linear-gradient(
       90deg,
@@ -192,11 +196,11 @@
     );
     transition: transform 0.5s ease;
   }
-  
+
   .btn-permission:hover::before {
     @apply translate-x-full;
   }
-  
+
   /* Scanline overlay (very subtle) */
   .scanline-overlay {
     pointer-events: none;
@@ -211,64 +215,95 @@
     );
     z-index: 9999;
   }
-  
+
   /* Detection box animation */
   .detection-box {
     @apply absolute border-2 rounded pointer-events-none;
     animation: detection-pulse 2s ease-in-out infinite;
   }
-  
+
   @keyframes detection-pulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; box-shadow: 0 0 10px currentColor; }
+    0%,
+    100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 10px currentColor;
+    }
   }
-  
+
   /* Alert flash animation */
   @keyframes alert-flash {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
   }
-  
+
   .alert-flash {
     animation: alert-flash 0.3s ease-in-out 2;
   }
-  
+
   /* Critical shake animation */
   @keyframes critical-shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-2px); }
-    75% { transform: translateX(2px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-2px);
+    }
+    75% {
+      transform: translateX(2px);
+    }
   }
-  
+
   .critical-shake {
     animation: critical-shake 0.2s ease-in-out 3;
   }
-  
+
   /* Typewriter effect for logs */
   @keyframes typewriter-cursor {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
-  
+
   .typewriter-cursor::after {
-    content: '▋';
+    content: "▋";
     animation: typewriter-cursor 1s step-end infinite;
     @apply text-primary ml-0.5;
   }
-  
+
   /* Ambient background gradient */
   .ambient-bg {
-    background: 
-      radial-gradient(ellipse at 20% 20%, hsl(var(--primary) / 0.05) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, hsl(var(--accent) / 0.03) 0%, transparent 50%),
+    background:
+      radial-gradient(
+        ellipse at 20% 20%,
+        hsl(var(--primary) / 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 80% 80%,
+        hsl(var(--accent) / 0.03) 0%,
+        transparent 50%
+      ),
       hsl(var(--background));
   }
-  
+
   /* HUD style text */
   .hud-text {
     @apply font-mono text-xs tracking-wider uppercase;
   }
-  
+
   /* Gauge styling */
   .gauge-ring {
     stroke-linecap: round;
