@@ -1,0 +1,13 @@
+# edge/config.yaml
+
+capture_interval_sec: 10
+
+camera:
+  device_id: 0
+  width: 640
+  height: 480
+sprinkler:
+  enabled: false   # SAFETY: false for Phase 1
+  gpio_pin: 21
+  max_duration_sec: 10
+  cooldown_sec: 30

@@ -1,0 +1,6 @@
+opencv-python
+pyyaml
+onnxruntime
+numpy
+RPi.GPIO
+ultralytics
