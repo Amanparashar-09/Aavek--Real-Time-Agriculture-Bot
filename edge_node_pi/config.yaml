@@ -7,7 +7,12 @@ camera:
   width: 640
   height: 480
 sprinkler:
-  enabled: false   # SAFETY: false for Phase 1
+  enabled: True   # SAFETY: false for Phase 1
   gpio_pin: 21
   max_duration_sec: 10
   cooldown_sec: 30
+
+yolo:
+  # Class IDs in your YOLO model that represent INFECTED leaves.
+  # Example for model.names == {0: "healthy_leaf", 1: "infected_leaf"}
+  infected_class_ids: [1]

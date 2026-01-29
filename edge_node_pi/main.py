@@ -21,8 +21,8 @@ spr_cfg = config["sprinkler"]
 # -----------------------------
 # IMAGE INPUT (PT OR ONNX)
 # -----------------------------
-IMAGE_PATH = "input_images/test.jpg"
-BACKEND = "pt"  # "pt" for best.pt, "onnx" for best.onnx
+IMAGE_PATH = "input_images/inf.jpg"
+BACKEND = "onnx"  # "pt" for best.pt, "onnx" for best.onnx
 
 if BACKEND == "pt":
     yolo_model_path = "models/best.pt"

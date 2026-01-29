@@ -18,8 +18,8 @@ class SeverityEstimator:
         leaf = np.transpose(leaf, (2, 0, 1))  # HWC -> CHW
         return leaf[np.newaxis, :]
 
-    def estimate(self, leaf):
-        """Estimate infected area percentage for a cropped leaf image.
+    def _forward_to_logits(self, leaf):
+        """Run the ONNX model and return a 2D logits/probability map.
 
         Handles common ONNX segmentation output shapes, including
         [N, 1, H, W] and [N, 2, H, W] (background/foreground).
@@ -27,7 +27,6 @@ class SeverityEstimator:
 
         inp = self.preprocess(leaf)
         output = self.session.run(None, {self.input_name: inp})[0]
-
         output = np.asarray(output)
 
         # Typical cases:
@@ -49,15 +48,29 @@ class SeverityEstimator:
             # Fallback: squeeze to 2D mask
             logits = output.squeeze()
 
-        # If model outputs probabilities in [0,1], this is a prob mask;
-        # if logits, 0 is the usual decision boundary.
-        # Start with 0.5 threshold; can be tuned.
-        mask = logits > 0.5
+        return logits
+
+    def mask_and_percent(self, leaf, threshold=0.5):
+        """Return boolean mask and infected area percentage for a leaf.
+
+        If the model outputs probabilities in [0,1], this is a prob mask;
+        if logits, 0 is the usual decision boundary. The default threshold
+        of 0.5 can be tuned.
+        """
+
+        logits = self._forward_to_logits(leaf)
+        mask = logits > threshold
 
         infected_pixels = int(np.count_nonzero(mask))
         total_pixels = int(mask.size)
         if total_pixels == 0:
-            return 0.0
+            return mask, 0.0
 
         percent = (infected_pixels / total_pixels) * 100.0
-        return float(percent)
+        return mask, float(percent)
+
+    def estimate(self, leaf):
+        """Estimate infected area percentage for a cropped leaf image."""
+
+        _, percent = self.mask_and_percent(leaf)
+        return percent
